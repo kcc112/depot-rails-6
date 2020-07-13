@@ -51,7 +51,11 @@ class ProductsController < ApplicationController
 
   private
     def set_product
-      @product = Product.find(params[:id])
+      begin
+        @product = Product.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        redirect_to store_index_path
+      end
     end
 
     def product_params
