@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   def index
     @products = Product.all
@@ -55,5 +56,10 @@ class ProductsController < ApplicationController
 
     def product_params
       params.require(:product).permit(:title, :description, :image_url, :price)
+    end
+
+    def invalid_product
+      logger.error "Attempt to access invalid product #{params[:id]}"
+      redirect_to store_index_path, notice: 'Invalid product'
     end
 end

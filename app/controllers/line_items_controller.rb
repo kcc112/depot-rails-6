@@ -1,6 +1,7 @@
 class LineItemsController < ApplicationController
   include CurrentCart
   before_action :set_cart, only: [:create]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_product
 
   def create
     begin
@@ -22,5 +23,10 @@ class LineItemsController < ApplicationController
   private
     def line_item_params
       params.require(:line_item).permit(:product_id)
+    end
+
+    def invalid_product
+      logger.error "Attempt to access invalid product #{params[:id]}"
+      redirect_to store_index_path, notice: 'Invalid product'
     end
 end
