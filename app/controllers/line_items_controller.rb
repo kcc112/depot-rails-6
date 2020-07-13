@@ -27,6 +27,6 @@ class LineItemsController < ApplicationController
 
     def invalid_product
       logger.error "Attempt to access invalid product #{params[:id]}"
-      redirect_to store_index_path, notice: 'Invalid product'
+      redirect_to store_index_url, notice: 'Invalid product'
     end
 end
