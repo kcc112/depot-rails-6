@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe LineItemsController, type: :controller do
   describe 'POST #create' do
-    let!(:product) { create :product } 
-    let(:valid_attributes) { { id: product.id, line_item: attributes_for(:line_item, product_id: product.id) } }
+    let(:product) { create :product } 
+    let(:valid_attributes) { { product_id: product.id, line_item: attributes_for(:line_item, product_id: product.id) } }
     let(:invalid_attributes) { { line_item: attributes_for(:line_item) } }
 
     context 'valid attributes' do
       subject { post :create, params: valid_attributes }
-      it { is_expected.to redirect_to products_path }
+      it { is_expected.to redirect_to product.line_items[0].cart}
       it { expect { subject }.to change(LineItem, :count) }
     end
 

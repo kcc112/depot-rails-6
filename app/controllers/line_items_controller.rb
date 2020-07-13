@@ -4,13 +4,12 @@ class LineItemsController < ApplicationController
 
   def create
     begin
-      product = Product.find(params[:id])
-
+      product = Product.find(params[:product_id])
       @line_item = @cart.line_items.build(product: product)
 
       respond_to do |format|
         if @line_item.save
-          format.html { redirect_to products_path, notice: 'Line item was successfully created.' }
+          format.html { redirect_to @cart, notice: 'Line item was successfully created.' }
         else
           format.html { redirect_to products_path, notice: 'Something went wrong.' }
         end

@@ -11,8 +11,8 @@ RSpec.describe ProductsController, type: :controller do
     end
 
     context 'products' do
-      let!(:product1) { create :product }
-      let!(:product2) { create :product }
+      let(:product1) { create :product }
+      let(:product2) { create :product }
 
       it 'should return all products' do
         expect(assigns(:products)).to match_array([product1, product2])
