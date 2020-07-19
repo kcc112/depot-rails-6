@@ -8,7 +8,7 @@ RSpec.describe LineItemsController, type: :controller do
 
     context 'valid attributes' do
       subject { post :create, params: valid_attributes }
-      it { is_expected.to redirect_to product.line_items[0].cart}
+      it { is_expected.to redirect_to store_index_url}
       it { expect { subject }.to change(LineItem, :count) }
     end
 
