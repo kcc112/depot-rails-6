@@ -1,6 +1,7 @@
 class LineItemsController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: [:create]
+  before_action :set_cart, only: [:create, :destroy]
+  before_action :set_line_item, only: [:destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_product
 
   def create
@@ -20,9 +21,20 @@ class LineItemsController < ApplicationController
     end
   end
 
+  def destroy
+    @line_item.delete
+    respond_to do |format|
+      format.html { redirect_to @cart, notice: 'Product was successfully removed' }
+    end
+  end
+
   private
     def line_item_params
       params.require(:line_item).permit(:product_id)
+    end
+
+    def set_line_item
+      @line_item = LineItem.find(params[:id])
     end
 
     def invalid_product

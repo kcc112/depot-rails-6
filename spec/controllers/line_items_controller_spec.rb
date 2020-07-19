@@ -18,4 +18,23 @@ RSpec.describe LineItemsController, type: :controller do
       it { expect { subject }.to_not change(LineItem, :count) }
     end
   end
+
+  describe '#DELETE destroy' do
+    let(:product) { create :product } 
+    let(:cart) { create :cart }
+    let(:line_item) { create :line_item, cart_id: cart.id, product_id: product.id }
+    subject { delete :destroy, params: { id: line_item.id }, session: { cart_id: cart.id } }
+
+    it { is_expected.to redirect_to cart }
+
+    it 'should redirect with notice' do
+      subject
+      expect(flash[:notice]).to be_present
+    end
+
+    it 'should remove line item' do
+      line_item
+      expect { subject }.to change(LineItem, :count).by(-1)
+    end
+  end
 end
