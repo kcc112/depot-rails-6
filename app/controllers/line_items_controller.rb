@@ -12,7 +12,7 @@ class LineItemsController < ApplicationController
       respond_to do |format|
         if @line_item.save
           format.html { redirect_to store_index_url, notice: 'Line item was successfully created.' }
-          format.js
+          format.js { @current_item = @line_item }
         else
           format.html { redirect_to products_path, notice: 'Something went wrong.' }
         end

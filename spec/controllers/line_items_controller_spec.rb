@@ -12,6 +12,12 @@ RSpec.describe LineItemsController, type: :controller do
       it { expect { subject }.to change(LineItem, :count) }
     end
 
+    context 'valid attributes ajax' do
+      subject { post :create, xhr: true, params: valid_attributes }
+      it { is_expected.to render_template :create }
+      it { expect { subject }.to change(LineItem, :count) }
+    end
+
     context 'invalid attributes' do
       subject { post :create, params: invalid_attributes }
       it { is_expected.to redirect_to store_index_path }
