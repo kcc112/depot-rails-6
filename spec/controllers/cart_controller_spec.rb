@@ -21,4 +21,21 @@ RSpec.describe CartsController, type: :controller do
       end
     end
   end
+
+  describe 'DELETE #destroy' do
+    let(:cart) { create :cart }
+    subject { delete :destroy, params: { id: cart.id}, session: { cart_id: cart.id } }
+
+    it { is_expected.to redirect_to store_index_url }
+    
+    it 'should redirect with notice' do
+      subject
+      expect(flash[:notice]).to be_present
+    end
+
+    it 'should delete cart' do
+      cart
+      expect { subject }.to change(Cart, :count).by(-1)
+    end
+  end
 end
