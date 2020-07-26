@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   resources :products
   resources :line_items, only: [:create, :destroy]
   resources :carts, only: [:show, :destroy]
+  resources :orders, only: [:new, :create]
 end
