@@ -1,0 +1,1 @@
+export { CheckPayType } from './check-pay-type';
