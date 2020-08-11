@@ -8,7 +8,7 @@ import { PurchaseOrderPayType } from './components/purchase-order-pay/purchase-o
 
 export function PayTypeSelector() {
 
-  const [payType, setPayType] = useState<PayTypes>(PayTypes.CREDIT_CARD_PAY)
+  const [payType, setPayType] = useState<PayTypes>(PayTypes.NO_PAY)
 
   const onPayTypeSelected = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setPayType(e.target.value as PayTypes);
