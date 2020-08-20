@@ -10,7 +10,7 @@ gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 4.0'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
-
+gem  'bcrypt', '~> 3.1.15'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
@@ -29,6 +29,7 @@ group :development do
   gem 'listen', '~> 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'solargraph'
 end
 
 group :test do
